@@ -13,10 +13,12 @@
       <form  [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()" >
 
         <div class="mb-2">
+
+          @let  namecontrol =registerForm.get('name');
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">name</label>
     <input formControlName="name" type="text" id="name" class="w-full mb-4 px-4 py-2 border rounded-md outline-none focus:ring-1 focus:ring-black">
 
-    @if (registerForm.get('name')?.errors && registerForm.get("name")?.touched) {
+    @if (namecontrol?.errors && namecontrol?.touched) {
         
     <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
   <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -26,14 +28,14 @@
   <div>
     <span class="font-medium">Ensure that these requirements are met:</span>
       <ul class="mt-1.5 list-disc list-inside">
-        @if (registerForm.get('name')?.getError('required')) {
+        @if (namecontrol?.getError('required')) {
             <li>Name is required</li>
         }
 
-        @if (registerForm.get('name')?.getError('minLength')) {
+        @if (namecontrol?.getError('minLength')) {
         <li>Name Should be more than or equal  3 chars</li>
     }
-     @if (registerForm.get('name')?.getError('maxLength')) {
+     @if (namecontrol?.getError('maxLength')) {
         <li> Name Should be less than or equal  20 chars</li>
     }
      
@@ -45,10 +47,11 @@
 
 
  <div class="mb-2">
+  @let emailcontrol = registerForm.get('email');
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
     <input formControlName="email" type="email" id="email" class="w-full mb-4 px-4 py-2 border rounded-md outline-none focus:ring-1 focus:ring-black">
 
-@if (registerForm.get('email')?.errors && registerForm.get("email")?.touched) {
+@if (emailcontrol?.errors && emailcontrol?.touched) {
 
      <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
   <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -58,11 +61,11 @@
   <div>
     <span class="font-medium">Ensure that these requirements are met:</span>
       <ul class="mt-1.5 list-disc list-inside">
-        @if (registerForm.get('email')?.getError('required')) {
+        @if (emailcontrol?.getError('required')) {
             <li>email is required</li>
         }
 
-        @if (registerForm.get('email')?.getError('email')) {
+        @if (emailcontrol?.getError('email')) {
         <li>Enter Valid Email</li>
     }
     
@@ -192,12 +195,39 @@
           <a routerLink="/login" class="text-blue-600 font-semibold hover:underline">Login</a>
         </p> -->
 
-        <button
+        <button [disabled]="isLoading"
           type="submit"
           class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
         >
-          Submit
+           sign Up
+          @if (isLoading) {
+            <i class="fas fa-spinner animate-spin"></i>
+          }
         </button>
+
+      @if (succesMsg) {
+          <div class="flex items-center p-4 my-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    {{succesMsg}}
+  </div>
+</div>
+      }
+
+      @if (errMsg) {
+        <div class="flex items-center p-4 my-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    {{errMsg}}
+  </div>
+</div>
+      }
       </form>
     </div>
   </div>
