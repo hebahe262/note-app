@@ -3,6 +3,7 @@ import { Component, inject, Inject } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule],
@@ -13,6 +14,7 @@ export class RegisterComponent {
 
   private readonly  _authService = inject (AuthService);
   private readonly  _router = inject (Router);
+  private readonly  _toastrService = inject (ToastrService);
 
   isLoading:boolean =false;
   succesMsg:string ="";
@@ -38,6 +40,10 @@ export class RegisterComponent {
     next:(res) =>{
       if(res.msg === 'done'){
         console.log(res);
+
+         // toster
+        this._toastrService.success(res.msg,'GoodNotes');
+
         // 3ashan ywdeny 3la el login fe wa2at mo3yab b2ah
         setTimeout(() => {
           this._router.navigate(['/login'])
@@ -50,6 +56,7 @@ export class RegisterComponent {
     },
     error:(err)=>{
       console.log(err);
+      // this._toastrService.error(err.msg,'faild');
        this.isLoading = false;
       //  show error
       this.errMsg = err.error.msg;

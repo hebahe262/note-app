@@ -2,6 +2,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ export class LoginComponent {
 
   private readonly  _authService = inject (AuthService);
   private readonly  _router = inject (Router);
+  private readonly  _toastrService = inject (ToastrService);
+
 
   isLoading:boolean =false;
   succesMsg:string ="";
@@ -33,13 +36,17 @@ export class LoginComponent {
    if(this.loginForm.valid){
     
     this.isLoading =true;
+
    this._authService.sendLoginData(this.loginForm.value).subscribe({
     next:(res) =>{
       if(res.msg === 'done'){
         console.log(res);
        
         // save token
-        localStorage.setItem('userToken',res.token)
+        localStorage.setItem('userToken',res.token);
+
+        // toster
+        this._toastrService.success(res.msg,'GoodNotes');
 
 
         // 3ashan ywdeny 3la el home fe wa2at mo3yab b2ah

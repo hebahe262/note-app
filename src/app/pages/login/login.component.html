@@ -17,7 +17,7 @@
  <div class="mb-2">
   @let emailcontrol = loginForm.get('email');
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-    <input formControlName="email" type="email" id="email" class="w-full mb-4 px-4 py-2 border rounded-md outline-none focus:ring-1 focus:ring-black">
+    <input autofocus formControlName="email" type="email" id="email" class="w-full mb-4 px-4 py-2 border rounded-md outline-none focus:ring-1 focus:ring-black">
 
 @if (emailcontrol?.errors && emailcontrol?.touched) {
 
@@ -53,7 +53,7 @@
 
  <div class="mb-2">
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
-    <input formControlName="password" type="password" id="password"class="w-full mb-4 px-4 py-2 border rounded-md outline-none focus:ring-1 focus:ring-black">
+    <input autofocus formControlName="password" type="password" id="password"class="w-full mb-4 px-4 py-2 border rounded-md outline-none focus:ring-1 focus:ring-black">
     @if (loginForm.get('password')?.errors && loginForm.get("password")?.touched) {
            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
   <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
