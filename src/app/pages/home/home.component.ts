@@ -1,9 +1,10 @@
-import { Component, ElementRef, HostListener, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Inotes } from '../../shared/interfaces/inotes/inotes';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { Inotes } from '../../shared/interfaces/inotes/inotes';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit , AfterViewChecked {
 
 
  _pLATFORM_ID =inject(PLATFORM_ID);
@@ -188,5 +189,10 @@ deleteSpecificNote(id:string):void{
  })
 }
 
+ngAfterViewChecked(): void {
+    if (typeof window !== 'undefined' && typeof initFlowbite === 'function') {
+      setTimeout(() => initFlowbite(), 0);
+    }
+  }
 
 }

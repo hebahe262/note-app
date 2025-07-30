@@ -3,26 +3,27 @@
 <div class="container mx-auto w-[90%] ">
   <div class="flex justify-center items-start">
     <!-- Modal toggle -->
-<button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+<!-- <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
  Add Note
-</button>
+</button> -->
+<i data-modal-target="default-modal" data-modal-toggle="default-modal" class="fa-solid fa-calendar-plus text-5xl"></i>
 
 </div>
 
-<div class="grid  sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  my-8 gap-5">
+<div class="grid  sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  my-8 gap-5 ">
 
   
 
 @for (note of NotesData; track $index) {
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div class="max-w-sm text-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 bg-black" >
    
     <div class="p-5">
        
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight  dark:text-white">
               {{note.title}}
             </h5>
      
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <p class="mb-3 font-normal  dark:text-gray-400">
            {{note.content}}
         </p>
         
